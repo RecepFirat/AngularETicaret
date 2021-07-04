@@ -11,5 +11,16 @@ namespace API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
+        [HttpGet]
+        public string GetProducts()
+        {
+            return "this will be a list Products";
+        }
+
+        [HttpGet("{id}")]
+        public string GetProducts(int id)
+        {
+            return "this will be a list Products";
+        }
     }
 }
