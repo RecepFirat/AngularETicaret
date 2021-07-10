@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.API", "AngularETicaret.API\AngularETicaret.API.csproj", "{ED0B5018-5647-4452-8A24-E29A308012C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularETicaret.Data", "AngularETicaret.Data\AngularETicaret.Data.csproj", "{C9FDB2D8-5829-492D-8B9A-27102844E581}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.Data", "AngularETicaret.Data\AngularETicaret.Data.csproj", "{C9FDB2D8-5829-492D-8B9A-27102844E581}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.API", "AngularETicaret.API\AngularETicaret.API.csproj", "{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ED0B5018-5647-4452-8A24-E29A308012C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ED0B5018-5647-4452-8A24-E29A308012C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ED0B5018-5647-4452-8A24-E29A308012C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ED0B5018-5647-4452-8A24-E29A308012C0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
