@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularETicaret.Data", "AngularETicaret.Data\AngularETicaret.Data.csproj", "{C9FDB2D8-5829-492D-8B9A-27102844E581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AngularETicaret.API", "AngularETicaret.API\AngularETicaret.API.csproj", "{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.API", "AngularETicaret.API\AngularETicaret.API.csproj", "{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.Core", "AngularETicaret.Core\AngularETicaret.Core.csproj", "{B168D91B-C0DE-4300-8F8E-90A328322383}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AngularETicaret.Infrastructure", "AngularETicaret.Infrastructure\AngularETicaret.Infrastructure.csproj", "{E6B2670B-255C-4913-9788-F358F50FA35E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +15,18 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9FDB2D8-5829-492D-8B9A-27102844E581}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C57C38AE-49C6-4DA6-B76E-7CAF86158CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B168D91B-C0DE-4300-8F8E-90A328322383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B168D91B-C0DE-4300-8F8E-90A328322383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B168D91B-C0DE-4300-8F8E-90A328322383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B168D91B-C0DE-4300-8F8E-90A328322383}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B2670B-255C-4913-9788-F358F50FA35E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B2670B-255C-4913-9788-F358F50FA35E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B2670B-255C-4913-9788-F358F50FA35E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B2670B-255C-4913-9788-F358F50FA35E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
