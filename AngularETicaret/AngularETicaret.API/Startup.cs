@@ -1,4 +1,5 @@
 
+using AngularETicaret.API.Helpers;
 using AngularETicaret.Core.Interfaces;
 using AngularETicaret.Infrastructure.DataContext;
 using AngularETicaret.Infrastructure.Implements;
@@ -26,7 +27,7 @@ namespace AngularETicaret.API
         {
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+            services.AddAutoMapper(typeof(MappingProfile));//buradaki mappingi ekliyorum
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDbContext<StoreContext>(opt =>

@@ -1,5 +1,8 @@
-﻿using AngularETicaret.Core.DBModels;
+﻿using AngularETicaret.API.Dtos;
+using AngularETicaret.Core.DBModels;
 using AngularETicaret.Core.Interfaces;
+using AngularETicaret.Core.Specifications;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -19,27 +22,57 @@ namespace AngularETicaret.API.Controllers
 
         //    _productRepository = productRepository;
         //}
-
+        private readonly IMapper _mapper;
         private readonly IGenericRepository<Product> _productRepository;
         private readonly IGenericRepository<ProductBrand> _productBrandRepository;
         private readonly IGenericRepository<ProductType> _productTypeRepository;
-        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<ProductBrand> productBrandRepository, IGenericRepository<ProductType> productTypeRepository)
+        public ProductsController(IMapper mapper, IGenericRepository<Product> productRepository, IGenericRepository<ProductBrand> productBrandRepository, IGenericRepository<ProductType> productTypeRepository)
         {
+            _mapper = mapper;
             _productBrandRepository = productBrandRepository;
             _productRepository = productRepository;
             _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
-            var data = await _productRepository.ListAllAsync();
+            var spec = new ProductsWithProductTypeAndBrandsSpecification();//includelu hallerini gönderiyoruz
+            var data = await _productRepository.ListAsync(spec);
+            data.Select(pro => new ProductToReturnDto {
+                Id = pro.Id,
+                Name = pro.Name,
+                Description = pro.Description,
+                PictureUrl = pro.PictureUrl,
+                Price = pro.Price,
+                ProductBrand = pro.ProductBrand != null ? pro.ProductBrand.Name : string.Empty,
+                ProductType = pro.ProductType != null ? pro.ProductType.Name : string.Empty,
+
+            }).ToList();
+
             return Ok(data);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Product>> GetProduct(int id)
+        public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
-            return await _productRepository.GetByIdAsync(id);
+
+            var spec = new ProductsWithProductTypeAndBrandsSpecification(id);//includelu hallerini gönderiyoruz
+            var product = await _productRepository.GetEntityWithSpec(spec);
+            //return new ProductToReturnDto
+            //{
+            //    Id = product.Id,
+            //    Name = product.Name,
+            //    Description = product.Description,
+            //    PictureUrl = product.PictureUrl,
+            //    Price = product.Price,
+            //    ProductBrand = product.ProductBrand!=null ?product.ProductBrand.Name:string.Empty,
+            //    ProductType = product.ProductType != null ? product.ProductType.Name : string.Empty,
+
+            //};
+
+
+            return _mapper.Map<Product, ProductToReturnDto>(product);
+            //  return await _productRepository.GetEntityWithSpec (spec);
         }
 
         [HttpGet("brands")]
