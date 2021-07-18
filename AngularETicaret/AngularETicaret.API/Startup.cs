@@ -25,6 +25,7 @@ namespace AngularETicaret.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -32,7 +33,8 @@ namespace AngularETicaret.API
             //{
             //    opt.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), conf =>
             //    {
-            //        conf.MigrationsAssembly("AngularETicaret.API");
+            //        conf.MigrationsAssembly("AngularE
+            //        Ticaret.API");
             //    });
             //});
             services.AddSwaggerGen(c =>

@@ -13,35 +13,46 @@ namespace AngularETicaret.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductRepository _productRepository;
-        public ProductsController(IProductRepository productRepository)
-        {
+        //private readonly IProductRepository _productRepository;
+        //public ProductsController(IProductRepository productRepository)
+        //{
 
+        //    _productRepository = productRepository;
+        //}
+
+        private readonly IGenericRepository<Product> _productRepository;
+        private readonly IGenericRepository<ProductBrand> _productBrandRepository;
+        private readonly IGenericRepository<ProductType> _productTypeRepository;
+        public ProductsController(IGenericRepository<Product> productRepository, IGenericRepository<ProductBrand> productBrandRepository, IGenericRepository<ProductType> productTypeRepository)
+        {
+            _productBrandRepository = productBrandRepository;
             _productRepository = productRepository;
+            _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
         public async Task<ActionResult<List<Product>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
-            var data = await _productRepository.GetProductAsync();
+            var data = await _productRepository.ListAllAsync();
             return Ok(data);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return await _productRepository.GetProductByIdAsync(id);
+            return await _productRepository.GetByIdAsync(id);
         }
 
         [HttpGet("brands")]
-        public async Task<ActionResult<List<Product>>> GetProductBrands() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<List<ProductBrand>>> GetProductBrands() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
-            var data = await _productRepository.GetProductBrandsAsync();
+            var data = await _productBrandRepository.ListAllAsync();
             return Ok(data);
         }
         [HttpGet("types")]
-        public async Task<ActionResult<List<Product>>> GetProductTypes() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<List<ProductType>>> GetProductTypes() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
-            var data = await _productRepository.GetProductTypesAsync();
+            var data = await _productTypeRepository.ListAllAsync();
+
             return Ok(data);
         }
 
