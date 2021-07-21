@@ -11,5 +11,7 @@ namespace AngularETicaret.Core.Specifications
     {
         Expression<Func<T, bool>> Criteria { get; }// T tipi göndericem ve bana bool bi deger dönmesi gerek diyorum
         List<Expression<Func<T, object>>> Includes{ get;}//T tipi bi deger göndericem ve bana object bi deger dönmesi gerek diyorum
+        Expression<Func<T,object>> OrderByDescending { get; }
+        Expression<Func<T, object>> OrderBy{ get; }
     }
 }

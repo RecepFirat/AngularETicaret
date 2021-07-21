@@ -33,9 +33,9 @@ namespace AngularETicaret.API.Controllers
             _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort) //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
-            var spec = new ProductsWithProductTypeAndBrandsSpecification();//includelu hallerini gönderiyoruz
+            var spec = new ProductsWithProductTypeAndBrandsSpecification(sort);//includelu hallerini gönderiyoruz
             var data = await _productRepository.ListAsync(spec);
             //data.Select(pro => new ProductToReturnDto {
             //    Id = pro.Id,
