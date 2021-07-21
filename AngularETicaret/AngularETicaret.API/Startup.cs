@@ -1,4 +1,5 @@
 
+using AngularETicaret.API.Extensions;
 using AngularETicaret.API.Helpers;
 using AngularETicaret.API.Middleware;
 using AngularETicaret.Core.Interfaces;
@@ -26,8 +27,7 @@ namespace AngularETicaret.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddApplicationServices();
             services.AddAutoMapper(typeof(MappingProfile));//buradaki mappingi ekliyorum
             services.AddControllers();
             services.AddDbContext<StoreContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -39,10 +39,7 @@ namespace AngularETicaret.API
             //        Ticaret.API");
             //    });
             //});
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AngularETicaret.API", Version = "v1" });
-            });
+            services.AddSwaggerDocumentation();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -53,8 +50,7 @@ namespace AngularETicaret.API
             //}
             app.UseMiddleware<ExceptionMiddleware>();
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularETicaret.API v1"));
+            app.UseSwaggerDocumention();
             app.UseStatusCodePagesWithReExecute("/error/{0}");//error controllerim calýssýn diye
             app.UseRouting();
 
