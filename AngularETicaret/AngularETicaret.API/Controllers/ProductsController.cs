@@ -12,9 +12,8 @@ using System.Threading.Tasks;
 
 namespace AngularETicaret.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+ 
+    public class ProductsController : BaseApiController
     {
         //private readonly IProductRepository _productRepository;
         //public ProductsController(IProductRepository productRepository)
@@ -34,22 +33,22 @@ namespace AngularETicaret.API.Controllers
             _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDto>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts() //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
         {
             var spec = new ProductsWithProductTypeAndBrandsSpecification();//includelu hallerini gönderiyoruz
             var data = await _productRepository.ListAsync(spec);
-            data.Select(pro => new ProductToReturnDto {
-                Id = pro.Id,
-                Name = pro.Name,
-                Description = pro.Description,
-                PictureUrl = pro.PictureUrl,
-                Price = pro.Price,
-                ProductBrand = pro.ProductBrand != null ? pro.ProductBrand.Name : string.Empty,
-                ProductType = pro.ProductType != null ? pro.ProductType.Name : string.Empty,
+            //data.Select(pro => new ProductToReturnDto {
+            //    Id = pro.Id,
+            //    Name = pro.Name,
+            //    Description = pro.Description,
+            //    PictureUrl = pro.PictureUrl,
+            //    Price = pro.Price,
+            //    ProductBrand = pro.ProductBrand != null ? pro.ProductBrand.Name : string.Empty,
+            //    ProductType = pro.ProductType != null ? pro.ProductType.Name : string.Empty,
 
-            }).ToList();
+            //}).ToList();
 
-            return Ok(data);
+            return Ok(_mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDto>>(data));
         }
 
         [HttpGet("{id}")]
