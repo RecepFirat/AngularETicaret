@@ -1,5 +1,6 @@
 
 using AngularETicaret.API.Helpers;
+using AngularETicaret.API.Middleware;
 using AngularETicaret.Core.Interfaces;
 using AngularETicaret.Infrastructure.DataContext;
 using AngularETicaret.Infrastructure.Implements;
@@ -46,13 +47,15 @@ namespace AngularETicaret.API
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularETicaret.API v1"));
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+            app.UseMiddleware<ExceptionMiddleware>();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AngularETicaret.API v1"));
+            app.UseStatusCodePagesWithReExecute("/error/{0}");//error controllerim calýssýn diye
             app.UseRouting();
 
             app.UseAuthorization();

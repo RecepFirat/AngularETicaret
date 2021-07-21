@@ -21,4 +21,8 @@
     <ProjectReference Include="..\AngularETicaret.Infrastructure\AngularETicaret.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
