@@ -1,4 +1,5 @@
 ﻿using AngularETicaret.API.Dtos;
+using AngularETicaret.API.Helpers;
 using AngularETicaret.Core.DBModels;
 using AngularETicaret.Core.Interfaces;
 using AngularETicaret.Core.Specifications;
@@ -33,10 +34,13 @@ namespace AngularETicaret.API.Controllers
             _productTypeRepository = productTypeRepository;
         }
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetProducts(string sort,int? brandId,int? typeId) //public async Task<IActionResult> GetProducts( ) bu şekildede yapılabilir
+        public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(/*sen bunu urlden cekıceksin diyorum*/[FromQuery] ProductSpecParams productSpecParams) //public async Task<IActionResult> GetProducts() bu şekildede yapılabilir
         {
-            var spec = new ProductsWithProductTypeAndBrandsSpecification(sort,brandId,typeId);//includelu hallerini gönderiyoruz
-            var data = await _productRepository.ListAsync(spec);
+            var spec = new ProductsWithProductTypeAndBrandsSpecification(productSpecParams);//includelu hallerini gönderiyoruz
+            var countSpec = new ProductWithFiltersForCountSpecification(productSpecParams);
+            var totalItems = await _productRepository.CountAsync(spec);
+            var products = await _productRepository.ListAsync(spec);
+            var data = _mapper.Map<IReadOnlyList<Product>, IReadOnlyList<ProductToReturnDto>>(products);
             //data.Select(pro => new ProductToReturnDto {
             //    Id = pro.Id,
             //    Name = pro.Name,
@@ -48,7 +52,7 @@ namespace AngularETicaret.API.Controllers
 
             //}).ToList();
 
-            return Ok(_mapper.Map<IReadOnlyList<Product>,IReadOnlyList<ProductToReturnDto>>(data));
+            return Ok(new Pagination <ProductToReturnDto>(productSpecParams.PageIndex,productSpecParams.PageSize,totalItems,data));
         }
 
         [HttpGet("{id}")]
@@ -64,8 +68,8 @@ namespace AngularETicaret.API.Controllers
             //    Description = product.Description,
             //    PictureUrl = product.PictureUrl,
             //    Price = product.Price,
-            //    ProductBrand = product.ProductBrand!=null ?product.ProductBrand.Name:string.Empty,
-            //    ProductType = product.ProductType != null ? product.ProductType.Name : string.Empty,
+            //    ProductBrand = product.ProductBrand!=null ? product.ProductBrand.Name : string.Empty,
+            //    ProductType = product.ProductType != null ? product.ProductType.Name  : string.Empty,
 
             //};
 

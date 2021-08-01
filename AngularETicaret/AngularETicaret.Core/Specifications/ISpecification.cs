@@ -13,5 +13,8 @@ namespace AngularETicaret.Core.Specifications
         List<Expression<Func<T, object>>> Includes{ get;}//T tipi bi deger göndericem ve bana object bi deger dönmesi gerek diyorum
         Expression<Func<T,object>> OrderByDescending { get; }
         Expression<Func<T, object>> OrderBy{ get; }
+        int Take { get; }
+        int Skip { get; }
+        bool IsPagingEnabled { get; }
     }
 }
