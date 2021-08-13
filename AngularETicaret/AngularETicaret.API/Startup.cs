@@ -39,6 +39,12 @@ namespace AngularETicaret.API
             //        Ticaret.API");
             //    });
             //});
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CorsPolicy", policy => {
+                    policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200");//her türlü istegi kabul et  diyorum
+                });
+            });
             services.AddSwaggerDocumentation();
         }
 
@@ -49,13 +55,14 @@ namespace AngularETicaret.API
             //    app.UseDeveloperExceptionPage();
             //}
             app.UseMiddleware<ExceptionMiddleware>();
-
+            app.UseHttpsRedirection();
             app.UseSwaggerDocumention();
             app.UseStatusCodePagesWithReExecute("/error/{0}");//error controllerim calýssýn diye
+            app.UseCors("CorsPolicy");
             app.UseRouting();
-
+          
             app.UseAuthorization();
-
+        
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
